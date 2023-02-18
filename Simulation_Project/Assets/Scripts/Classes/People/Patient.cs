@@ -7,15 +7,15 @@ public class Patient : MonoBehaviour
     int[] pos;
     int[] home;
     int p_id, age, time_to_live;
-    string name;
+    string p_name;
     bool infected,alive,healed;
     
-    public Patient(int[] init, string nam="Bob", int ag, int pin){
+    public Patient(string nam, int[] init, int ag, int pin){
         pos=init;
         home=init;
         p_id=pin;
         age=ag;
-        name=nam;
+        p_name=nam;
         infected=false;
         alive=true;
         healed=false;

@@ -6,11 +6,6 @@ public class Hospital : Node
 {
     int hospital_id;
     string hospital_na;
-<<<<<<< Updated upstream
-    public Hospital(int id, int n, string name) : base(id, n, 2,name){
-        hospital_id=id;
-        hospital_na=name;
-=======
     int beds,num_pa;
     Patient[] current_patients;
     public Hospital(int id, int n, string name, int be, int np) : base(id, n, 2,name){

@@ -57,7 +57,6 @@ public class Hospital : Node
             res.decrement(ks[i],vals[i]);
         }
         return;
->>>>>>> Stashed changes
     }
     //Resources Section
     

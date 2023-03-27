@@ -8,7 +8,7 @@ public class CityGraph : MonoBehaviour
     Node[] arr;
     public CityGraph(){
         arr=new Node[5];
-        arr[0]=new House(1,n,"Subramani's");
+        /*arr[0]=new House(1,n,"Subramani's");
         arr[1]=new House(2,n,"Balamurugan's");
         arr[2]=new Hospital(1,n,"Apollo");
         arr[3]=new Hospital(2,n,"Kamakshi");
@@ -18,7 +18,7 @@ public class CityGraph : MonoBehaviour
         arr[0].Create_Connection(arr[3]);
         arr[1].Create_Connection(arr[3]);
         arr[2].Create_Connection(arr[4]);
-        arr[3].Create_Connection(arr[4]);
+        arr[3].Create_Connection(arr[4]);*/
     }
 
     void Start()

@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Package : MonoBehaviour{
-    bool next = false;
+    //bool next = false;
     bool split = false;
+    //bool begin=false;
+    bool end=false;
     /*types: 0 = next/split
       types: 1 = node send
       types: 2 = event action + required inputs
       types: 3 = compact manager -> wave send*/ 
-    int action = 0; 
-    int[] node_id = null;
+    public Patient pnode;
+    public Hospital hnode;
+    public Warehouse wnode;
     
+    public bool is_split(){
+      return split;
+    }
+    public bool is_end(){
+      return end;
+    }
+
+    /*public bool is_next(){
+      return next;
+    }*/
 }

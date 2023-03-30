@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Patient : MonoBehaviour
 {
-    int[] pos;
-    int[] home;
+    public int[] pos;
+    public int[] home;
     public int p_id, age, time_to_live;
     string p_name;
-    bool infected,alive,healed;
+    public bool infected,alive,healed;
     
     public Patient(string nam, int[] init, int ag, int pin){
         pos=init;

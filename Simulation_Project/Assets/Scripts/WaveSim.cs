@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+class gen_vars{
+    public static int days_to_heal=8;
+    public static int days_to_die=5;
+}
+
 class pa{
     int[] pos;
     int[] hid;
@@ -20,8 +25,11 @@ class pa{
         inf=i;
         die=di;
         heal=he;
+        //days with infected person
         dawinf=dwi;
+        //days without treatment
         dawotr=dwot;
+        //days of treatment done
         daoftr=dft;
     }
 
@@ -33,6 +41,8 @@ class wa{
 
     public void set(int[] wi, int das){
         wid=wi;
+        //
+        days since last restock
         dasire=das;
     }
 }
@@ -44,12 +54,14 @@ public class WaveSim : MonoBehaviour
     Package[] out_msg;
     wa[] warr;
     pa[] parr;
+    gen_vars ge;
     public void recieve_msg(Package[] m){
         in_msg=m;
         if(wave==0){
             init_arrs();
         }
-        update_parr();
+        int spl=update_parr();
+        update_warr(spl);
     }
 
     void init_arrs(){
@@ -72,13 +84,47 @@ public class WaveSim : MonoBehaviour
         }
     }
 
-    void update_parr(){
+    int update_parr(){
         int i=0;
         Package it=in_msg[i];
         while(!it.is_split()){
             i++;
             it=in_msg[i];
+            int update[]=
+            
+            for pe in parr{
+                if pe.p_id==it.pnode.p_id{
+                    pe.pos=it.pnode.pos;
+                    pe.inf=it.pnode.infected;
+                    if pe.daoftr==ge.days_to_heal{                        
+                        pe.heal=true;
+                        pe.inf=false;
+                    }
+                    if pe.inf==true && pe.heal==false && pe.hid!=pe.pos{
+                        pe.dawotr++;
+                        if pe.dawotr>=ge.days_to_die{
+                            pe.die=true;
+                        }
+                    }
+                    if pe.inf==true && pe.pos==pe.hid{
+                        check_house_inf(pe);
+                    }
+                }
+            }
+        }
+        return i;
+    }
 
+    void check_house_inf(pa x){
+
+    }
+
+    void update_warr(int inn){
+        int i=inn+1;
+        Package it=in_msg[i];
+        while(!it.is_end()){
+            it=in_msg[i];
+            i++;
         }
     }
     

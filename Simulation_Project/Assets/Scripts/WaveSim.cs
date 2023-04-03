@@ -7,6 +7,9 @@ class gen_vars{
     public static int days_with_inf_to_be=2;
     public static int days_to_die=5;
     public static int num_of_people=9;
+    public static int num_of_wares=2;
+    public static int days_bfor_re=5;
+
 }
 
 class pa{
@@ -21,6 +24,8 @@ class pa{
     public int daoftr;
     public bool checked_this_Wave=false;
 
+    public int[] changes_out;
+
     public void set(int[] pi,int[] hi,int pd,bool i,bool di, bool he, int dwi, int dwot, int dft){
         pos=pi;
         hid=hi;
@@ -34,18 +39,23 @@ class pa{
         dawotr=dwot;
         //days of treatment done
         daoftr=dft;
+        //init changes [infect, die, heal]
+        changes_out=new int[0,0,0];
     }
 
 };
 
 class wa{
-    int[] wid;
-    int dasire;
+    public int[] wid;
+    public int dasire;
+    public int[] changes_out;
 
     public void set(int[] wi, int das){
         wid=wi;
         //days since last restock
         dasire=das;
+        //init changes [restock]
+        changes_out=new int[0];
     }
 }
 
@@ -56,7 +66,6 @@ public class WaveSim : MonoBehaviour
     Package[] out_msg;
     wa[] warr;
     pa[] parr;
-    gen_vars ge;
     public void recieve_msg(Package[] m){
         in_msg=m;
         if(wave==0){
@@ -89,13 +98,15 @@ public class WaveSim : MonoBehaviour
 
     int update_parr(){
         int i=0;
+        int[] ch=new int[0,0,0];
         Package it=in_msg[i];
-        while(!it.is_split()){
+        for(int j=0;j<gen_vars.num_of_people;j++){
+            parr[j].checked_this_Wave=false;
+            parr[j].changes_out=ch;
+        }
+        while(!it.is_end()){
             i++;
             it=in_msg[i];
-            for(int j=0;j<gen_vars.num_of_people;j++){
-                parr[j].checked_this_Wave=false;
-            }
             for(int j=0;j<gen_vars.num_of_people;j++){
                 pa pe = parr[j];
                 if(pe.pid==it.pnode.p_id){ 
@@ -106,12 +117,13 @@ public class WaveSim : MonoBehaviour
                     }
                     if(pe.daoftr==gen_vars.days_to_heal){                        
                         pe.heal=true;
-                        pe.inf=false;
+                        pe.changes_out[2]=1;
                     }
                     if(pe.inf==true && pe.heal==false && pe.hid==pe.pos){
                         pe.dawotr++;
                         if(pe.dawotr>=gen_vars.days_to_die){
                             pe.die=true;
+                            pe.changes_out[1]=1;
                         }
                     }
                     if(pe.inf==true && pe.pos==pe.hid){
@@ -125,12 +137,20 @@ public class WaveSim : MonoBehaviour
     }
 
     void check_house_inf(pa x){
+        Random rnd = new Random();
         for(int j=0;j<gen_vars.num_of_people;j++){
             pa pe=parr[j];
-            if(pe.checked_this_Wave==false && x.pos==pe.pos){
+            if(pe.checked_this_Wave==false && x.pos==pe.pos && pe.inf=false && pe.heal=false){
                 pe.dawinf++;
                 if(pe.dawinf>=gen_vars.days_with_inf_to_be){
-                    
+                    pe.inf=true;
+                    pe.changes_out[0]=1;
+                }
+                else if(pe.dawinf>0&&pe.dawinf<gen_vars.days_with_inf_to_be){
+                    if(rnd.next(1,100)>=50){
+                        pe.inf=true;
+                        pe.changes_out[0]=1;
+                    }
                 }
 
             }
@@ -138,11 +158,16 @@ public class WaveSim : MonoBehaviour
     }
 
     void update_warr(int inn){
-        int i=inn+1;
-        Package it=in_msg[i];
-        while(!it.is_end()){
-            it=in_msg[i];
-            i++;
+        int[] ch=new int[0];
+        for(int j=0;j<gen_vars.num_of_wares;j++){
+            warr[j].changes_out=ch;
+        }
+        for(int j=0;j<gen_vars.num_of_wares;j++){
+            warr[j].dasire++;
+            if(warr[j].dasire>=gen_vars.days_bfor_re){
+                warr[j].dasire=0;
+                warr[j].changes_out[0]=1;
+            }
         }
     }
     

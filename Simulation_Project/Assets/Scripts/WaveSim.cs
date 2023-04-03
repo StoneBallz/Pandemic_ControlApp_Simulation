@@ -4,19 +4,22 @@ using UnityEngine;
 
 class gen_vars{
     public static int days_to_heal=8;
+    public static int days_with_inf_to_be=2;
     public static int days_to_die=5;
+    public static int num_of_people=9;
 }
 
 class pa{
-    int[] pos;
-    int[] hid;
-    bool inf;
-    bool die;
-    bool heal;
-    int pid;
-    int dawinf;
-    int dawotr;
-    int daoftr;
+    public int[] pos;
+    public int[] hid;
+    public bool inf;
+    public bool die;
+    public bool heal;
+    public int pid;
+    public int dawinf;
+    public int dawotr;
+    public int daoftr;
+    public bool checked_this_Wave=false;
 
     public void set(int[] pi,int[] hi,int pd,bool i,bool di, bool he, int dwi, int dwot, int dft){
         pos=pi;
@@ -41,8 +44,7 @@ class wa{
 
     public void set(int[] wi, int das){
         wid=wi;
-        //
-        days since last restock
+        //days since last restock
         dasire=das;
     }
 }
@@ -62,6 +64,7 @@ public class WaveSim : MonoBehaviour
         }
         int spl=update_parr();
         update_warr(spl);
+        wave++;
     }
 
     void init_arrs(){
@@ -90,25 +93,31 @@ public class WaveSim : MonoBehaviour
         while(!it.is_split()){
             i++;
             it=in_msg[i];
-            int update[]=
-            
-            for pe in parr{
-                if pe.p_id==it.pnode.p_id{
+            for(int j=0;j<gen_vars.num_of_people;j++){
+                parr[j].checked_this_Wave=false;
+            }
+            for(int j=0;j<gen_vars.num_of_people;j++){
+                pa pe = parr[j];
+                if(pe.pid==it.pnode.p_id){ 
                     pe.pos=it.pnode.pos;
                     pe.inf=it.pnode.infected;
-                    if pe.daoftr==ge.days_to_heal{                        
+                    if(pe.pos[1]==2){
+                        pe.daoftr++;
+                    }
+                    if(pe.daoftr==gen_vars.days_to_heal){                        
                         pe.heal=true;
                         pe.inf=false;
                     }
-                    if pe.inf==true && pe.heal==false && pe.hid!=pe.pos{
+                    if(pe.inf==true && pe.heal==false && pe.hid==pe.pos){
                         pe.dawotr++;
-                        if pe.dawotr>=ge.days_to_die{
+                        if(pe.dawotr>=gen_vars.days_to_die){
                             pe.die=true;
                         }
                     }
-                    if pe.inf==true && pe.pos==pe.hid{
+                    if(pe.inf==true && pe.pos==pe.hid){
                         check_house_inf(pe);
                     }
+                    break;
                 }
             }
         }
@@ -116,7 +125,16 @@ public class WaveSim : MonoBehaviour
     }
 
     void check_house_inf(pa x){
+        for(int j=0;j<gen_vars.num_of_people;j++){
+            pa pe=parr[j];
+            if(pe.checked_this_Wave==false && x.pos==pe.pos){
+                pe.dawinf++;
+                if(pe.dawinf>=gen_vars.days_with_inf_to_be){
+                    
+                }
 
+            }
+        }
     }
 
     void update_warr(int inn){

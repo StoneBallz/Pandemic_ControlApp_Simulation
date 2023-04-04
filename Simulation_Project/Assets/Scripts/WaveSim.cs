@@ -63,7 +63,6 @@ public class WaveSim : MonoBehaviour
 {
     int wave=0;
     Package[] in_msg;
-    Package[] out_msg;
     wa[] warr;
     pa[] parr;
     public void recieve_msg(Package[] m){
@@ -74,6 +73,17 @@ public class WaveSim : MonoBehaviour
         int spl=update_parr();
         update_warr(spl);
         wave++;
+        return return_msg();
+    }
+
+    public Package[] return_msg(){
+        Package[] out_msg=new Package[gen_vars.num_of_people+gen_vars.num_of_wares];
+        Package temp;
+        for(int i=0;i<gen_vars.num_of_people;i++){
+            temp.pat_change=parr[i].changes_out;
+            out_msg;
+        }
+        return out_msg;
     }
 
     void init_arrs(){

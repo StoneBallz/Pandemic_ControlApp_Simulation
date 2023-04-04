@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class CityGraph : MonoBehaviour
 {
-    public int n=5;
-    Node[] arr;
+    public static int n=5;
+    public Package[] arr=new Package[n];
     public CityGraph(){
-        arr=new Node[5];
         /*arr[0]=new House(1,n,"Subramani's");
         arr[1]=new House(2,n,"Balamurugan's");
         arr[2]=new Hospital(1,n,"Apollo");
@@ -21,14 +20,8 @@ public class CityGraph : MonoBehaviour
         arr[3].Create_Connection(arr[4]);*/
     }
 
-    void Start()
-    {
+    public Package[] set_get_city_state(){
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return arr;
     }
 }

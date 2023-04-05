@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CityGraph : MonoBehaviour
 {
-    public static int n=5;
+    public static int n=gen_vars.n_nodes;
     public Package[] arr=new Package[n];
+    public Package[] pat_arr=new Package[gen_vars.num_of_people];
     public CityGraph(){
         /*arr[0]=new House(1,n,"Subramani's");
         arr[1]=new House(2,n,"Balamurugan's");
@@ -20,8 +21,6 @@ public class CityGraph : MonoBehaviour
         arr[3].Create_Connection(arr[4]);*/
     }
 
-    public Package[] set_get_city_state(){
-        
-        return arr;
-    }
+    // Pre Mukund Merge:
+    
 }

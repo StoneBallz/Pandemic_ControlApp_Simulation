@@ -2,17 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
-class gen_vars{
-    public static int days_to_heal=8;
-    public static int days_with_inf_to_be=2;
-    public static int days_to_die=5;
-    public static int num_of_people=9;
-    public static int num_of_wares=2;
-    public static int days_bfor_re=5;
-
-}
-
 class pa{
     public int[] pos;
     public int[] hid;
@@ -64,34 +53,49 @@ class wa{
 
 public class WaveSim : MonoBehaviour
 {
+    Package temp=new Package();
     int wave=0;
     Package[] in_msg;
-    wa[] warr;
-    pa[] parr;
+    wa[] warr=new wa[gen_vars.num_of_wares];
+    pa[] parr=new pa[gen_vars.num_of_people];
     public Package[] recieve_msg(Package[] m){
         in_msg=m;
         if(wave==0){
             init_arrs();
         }
         int spl=update_parr();
-        update_warr(spl);
+        update_warr();
         wave++;
         return return_msg();
     }
 
     public Package[] return_msg(){
-        Package[] out_msg=new Package[gen_vars.num_of_people+gen_vars.num_of_wares];
-        Package temp=new Package();
-        int j=0;
-        for(int i=0;i<gen_vars.num_of_people;i++){
+        int[] ch=new int[]{0,0,0};
+        Package[] out_msg=new Package[1+gen_vars.num_of_people+1+gen_vars.num_of_wares+1];
+        int j=0,k=0;
+        temp.switch_begin();
+        out_msg[j]=temp;
+        j++;
+        temp.switch_pat_data();
+        for(int i=1;i<gen_vars.num_of_people;i++){
+            temp.pid=parr[i].pid;
             temp.pat_change=parr[i].changes_out;
             out_msg[i]=temp;
             j++;
         }
+        temp.switch_split();
+        out_msg[j]=temp;
+        temp.switch_war_data();
+        j++;
+        k=j;
         for(int i=0;i<gen_vars.num_of_wares;i++){
             temp.war_change=warr[i].changes_out;
             out_msg[i+j]=temp;
+            k++;
         }
+        temp.switch_end();
+        out_msg[k]=temp;
+        temp.switch_null();
         return out_msg;
     }
 
@@ -99,19 +103,21 @@ public class WaveSim : MonoBehaviour
         int i=1, splits=0;;
         pa temppa=new pa();
         wa tempwa=new wa();
+        int[] widin=new int[2];
+        widin[1]=3;
 
         Package it=in_msg[i];
         while(!it.is_end()){
             while(!it.is_split()&&splits==0){
                 temppa.set(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
+                parr[i-1]=temppa;
                 i++;
             }
-            while(!it.is_split()&&splits==1){
-                tempwa.set(it.wnode.node_id, 0);
-                i++;
-            }
-            splits++;
-            i++;
+        }
+        for(int j=0;j<gen_vars.num_of_wares;j++){
+            widin[0]=j;
+            tempwa.set(widin, 0);
+            warr[j]=tempwa;
         }
     }
 
@@ -185,7 +191,7 @@ public class WaveSim : MonoBehaviour
         return true;
     }
 
-    void update_warr(int inn){
+    void update_warr(){
         int[] ch=new int[]{0};
         for(int j=0;j<gen_vars.num_of_wares;j++){
             warr[j].changes_out=ch;

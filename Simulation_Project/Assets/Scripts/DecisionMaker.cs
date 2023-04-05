@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class DecisionMaker : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+    public Package[] make_decision(Package[] arr){
+        
+        return form_final_decision();
+    }
+
+    Package[] form_final_decision(){
+        Package[] out_msg=new Package[1];
+        return out_msg;
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

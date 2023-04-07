@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Package : MonoBehaviour{
-  public Patient pnode=null;
-  public Warehouse wnode=null;
-  public House henode=null;
-  public Hospital hsnode=null;
+public class Package{
+  public Patient pnode;
+  public Warehouse wnode;
+  public House henode;
+  public Hospital hsnode;
   //
   public int pid=-1;
   public int[] pat_change=null;
@@ -118,6 +118,66 @@ public class Package : MonoBehaviour{
     hos_data_out=false;
     null_out();
   }
+  public void switch_war_del(){
+    war_del=!war_del;
+    split = false;
+    begin=false;
+    end=false;
+    pat_del=false;
+    pat_data_out=false;
+    //war_del=false;
+    war_data_out=false;
+    hou_del=false;
+    hou_data_out=false;
+    hos_del=false;
+    hos_data_out=false;
+    null_out();
+  }
+  public void switch_hou_del(){
+    hou_del=!hou_del;
+    split = false;
+    begin=false;
+    end=false;
+    pat_del=false;
+    pat_data_out=false;
+    war_del=false;
+    war_data_out=false;
+    //hou_del=false;
+    hou_data_out=false;
+    hos_del=false;
+    hos_data_out=false;
+    null_out();
+  }
+  public void switch_hos_del(){
+    hos_del=!hos_del;
+    split = false;
+    begin=false;
+    end=false;
+    pat_del=false;
+    pat_data_out=false;
+    war_del=false;
+    war_data_out=false;
+    hou_del=false;
+    hou_data_out=false;
+    //hos_del=false;
+    hos_data_out=false;
+    null_out();
+  }
+  public void switch_pat_del(){
+    pat_del=!pat_del;
+    split = false;
+    begin=false;
+    end=false;
+    //pat_del=false;
+    pat_data_out=false;
+    war_del=false;
+    war_data_out=false;
+    hou_del=false;
+    hou_data_out=false;
+    hos_del=false;
+    hos_data_out=false;
+    null_out();
+  }
   void null_out(){
     pnode=null;
     wnode=null;
@@ -147,4 +207,5 @@ public class Package : MonoBehaviour{
   public bool is_war_data_out(){
     return war_data_out;
   }
+  
 }

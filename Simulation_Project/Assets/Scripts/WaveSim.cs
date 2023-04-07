@@ -127,7 +127,7 @@ public class WaveSim : MonoBehaviour
         Package it=in_msg[i];
         for(int j=0;j<gen_vars.num_of_people;j++){
             parr[j].checked_this_wave=false;
-            parr[j].changes_out=ch;
+            //parr[j].changes_out=ch;
         }
         while(!it.is_end()){
             i++;

@@ -10,7 +10,7 @@ public class Patient : MonoBehaviour
     string p_name;
     public bool infected,alive,healed;
     
-    public Patient(string nam, int[] init, int ag, int pin){
+    public Patient(int pin, string nam, int[] init, int ag=18){
         pos=init;
         home=init;
         p_id=pin;
@@ -19,8 +19,6 @@ public class Patient : MonoBehaviour
         infected=false;
         alive=true;
         healed=false;
-        //for now for simplicity we set time to live as 4 waves across all ages/people
-        time_to_live=4;
     }
 
     public void infect(){

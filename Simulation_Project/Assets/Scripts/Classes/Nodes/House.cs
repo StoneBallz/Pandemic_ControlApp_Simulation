@@ -6,13 +6,12 @@ public class House : Node
 {
     int house_id;
     string house_na;
-    int num_pa;
+    int num_pa=gen_vars.num_of_people;
     Patient[] current_patients;
-    public House(int id, int n, string name, int np) : base(id, n, 1,name){
+    public House(int id, string name) : base(id, 1,name){
         house_id=id;
         house_na=name;
-        current_patients=new Patient[np];
-        num_pa=np;
+        current_patients=new Patient[num_pa];
     }
 
     //Patient Section

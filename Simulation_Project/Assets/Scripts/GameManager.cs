@@ -10,8 +10,10 @@ public class managed_vars{
 class gen_vars{
     //Simulation Numbers
     public static int n_nodes=5;
-    public static int num_of_people=9;
-    public static int num_of_wares=2;
+    public static int num_of_people=5;
+    public static int num_of_wares=1;
+    public static int num_of_hou=2;
+    public static int num_of_hos=2;
 
     // Simulation Factors
     public static int days_to_heal=8;
@@ -27,9 +29,9 @@ public class GameManager : MonoBehaviour
     public WaveSim wave_Sim;
     public DecisionMaker decision_maker;
     int running;
-    Package[] f_quad_out=null;
-    Package[] s_quad_out=null;
-    Package[] t_quad_out=null;
+    Package[] f_quad_out;
+    Package[] s_quad_out;
+    Package[] t_quad_out;
 
     int first_qudrant(){
         f_quad_out = wave_Sim.recieve_msg(city_graph.pat_arr);
@@ -81,11 +83,9 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        while(running==1){
-            first_qudrant();
-            second_quadrant();
-            third_quadrant();
-            fourth_quadrant();
-        }
+        first_qudrant();
+        second_quadrant();
+        third_quadrant();
+        fourth_quadrant();
     }
 }

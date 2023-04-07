@@ -3,18 +3,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public class Node : ScriptableObject
 {
     public int[] node_id;
     public Node[] con;
-    int n;
+    int n=gen_vars.n_nodes;
     string n_name;
     public int top=0;
     bool full=false;
-    public Node(int id, int nx, int type, string name){
+    public Node(int id, int type, string name){
         node_id=new int[]{id,type};
-        con=new Node[nx+1];
-        n=nx;
+        con=new Node[n+1];
         n_name=name;
     }
 

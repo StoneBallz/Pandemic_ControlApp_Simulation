@@ -6,14 +6,12 @@ public class Hospital : Node
 {
     int hospital_id;
     string hospital_na;
-    int beds,num_pa;
-    Patient[] current_patients;
-    public Hospital(int id, int n, string name, int be, int np) : base(id, n, 2,name){
+    int beds,num_pa=gen_vars.num_of_people;
+    Patient[] current_patients=new Patient[gen_vars.num_of_people];
+    public Hospital(int id, string name, int be=5) : base(id, 2,name){
         hospital_id=id;
         hospital_na=name;
         beds=be;
-        current_patients=new Patient[np];
-        num_pa=np;
     }
 
     //Patient Section

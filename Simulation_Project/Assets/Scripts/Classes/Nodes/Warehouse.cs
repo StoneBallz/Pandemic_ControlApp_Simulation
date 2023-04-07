@@ -6,7 +6,7 @@ public class Warehouse : Node
 {
     public int warehouse_id;
     string warehouse_na;
-    public Warehouse(int id, int n, string name) : base(id, n, 3,name){
+    public Warehouse(int id, string name) : base(id, 3,name){
         warehouse_id=id;
         warehouse_na=name;
     }

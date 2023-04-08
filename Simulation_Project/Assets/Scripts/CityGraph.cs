@@ -56,37 +56,46 @@ public class CityGraph : MonoBehaviour
 
         int j=0;
         pat_arr[0] = new Package();
-        pat_arr[0].begin=true;
+        pat_arr[0].switch_begin();
         j++;
 
         /*temp.switch_pat_del();
         temp.pnode=new Patient(1, "Gowtham", arr[1].henode.node_id);
         temp.pid=temp.pnode.p_id;*/
-        pat_arr[1].pnode = new Patient(1, "Gowtham", new int[]{1,1});
+        pat_arr[1] = new Package();
+        pat_arr[1].switch_pat_del();
+        pat_arr[1].pnode = new Patient(1, "Gowtham", arr[1].henode.node_id);
         pat_arr[1].pid=pat_arr[1].pnode.p_id;
         j++;
 
+        pat_arr[2] = new Package();
+        pat_arr[2].switch_pat_del();
         pat_arr[2].pnode = new Patient(2, "Austin", arr[1].henode.node_id);
         pat_arr[2].pid=pat_arr[2].pnode.p_id;
         j++;
 
+        pat_arr[3] = new Package();
+        pat_arr[3].switch_pat_del();
         pat_arr[3].pnode = new Patient(3, "Pavan", arr[1].henode.node_id);
         pat_arr[3].pid=pat_arr[3].pnode.p_id;
         j++;
 
+        pat_arr[4] = new Package();
+        pat_arr[4].switch_pat_del();
         pat_arr[4].pnode = new Patient(4, "Mukund", arr[2].henode.node_id);
         pat_arr[4].pid=pat_arr[4].pnode.p_id;
         j++;
 
+        pat_arr[5] = new Package();
+        pat_arr[5].switch_pat_del();
         pat_arr[5].pnode = new Patient(5, "Ajay", arr[2].henode.node_id);
         pat_arr[5].pid=pat_arr[5].pnode.p_id;
         j++;
 
         pat_arr[6] = new Package();
-        pat_arr[6].end=true;
+        pat_arr[6].switch_end();
         j++;
-
-        arr[1].henode.Print_Connections();
+        //arr[1].henode.Print_Connections();
     }
 
     // Pre Mukund Merge:

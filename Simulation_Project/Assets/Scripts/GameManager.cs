@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public CityGraph city_graph;
     public WaveSim wave_Sim;
     public DecisionMaker decision_maker;
-    int running;
+    //int running;
     Package[] f_quad_out;
     Package[] s_quad_out;
     Package[] t_quad_out;
@@ -73,19 +73,20 @@ public class GameManager : MonoBehaviour
     }
 
     int end_sim(){
-        running=-1;
+        //running=-1;
         return -1;
     }
 
     void Start()
     {
-        running=1;
-    }
-    void Update()
-    {
+        //running=1;
         first_qudrant();
         second_quadrant();
         third_quadrant();
         fourth_quadrant();
+    }
+    void Update()
+    {
+        
     }
 }

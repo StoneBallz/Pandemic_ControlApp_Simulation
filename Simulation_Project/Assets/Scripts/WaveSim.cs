@@ -55,15 +55,15 @@ public class WaveSim : MonoBehaviour
 {
     Package temp=new Package();
     int wave=0;
-    Package[] in_msg;
+    //Package[] in_msg;
     wa[] warr=new wa[gen_vars.num_of_wares];
     pa[] parr=new pa[gen_vars.num_of_people];
     public Package[] recieve_msg(Package[] m){
-        in_msg=m;
+        //in_msg=m;
         if(wave<1){
-            init_arrs(in_msg);
+            init_arrs(m);
         }
-        int spl=update_parr();
+        int spl=update_parr(m);
         update_warr();
         wave++;
         return return_msg();
@@ -106,26 +106,27 @@ public class WaveSim : MonoBehaviour
 
         Package it=in_ms[i];
         while(!it.is_end()){
+            Debug.Log("i "+i);
+            Debug.Log("Name "+it.pnode.p_name);
             parr[i-1]=new pa(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
             i++;
+            it=in_ms[i];
         }
         for(int j=0;j<gen_vars.num_of_wares;j++){
-            widin[0]=j;
+            widin[0]=j+1;
             warr[j]=new wa(widin, 0);
         }
     }
 
-    int update_parr(){
-        int i=0;
+    int update_parr(Package[] in_ms){
+        int i=1;
         int[] ch=new int[]{0,0,0};
-        Package it=in_msg[i];
+        Package it=in_ms[i];
         for(int j=0;j<gen_vars.num_of_people;j++){
             parr[j].checked_this_wave=false;
             //parr[j].changes_out=ch;
         }
         while(!it.is_end()){
-            i++;
-            it=in_msg[i];
             for(int j=0;j<gen_vars.num_of_people;j++){
                 pa pe = parr[j];
                 if(pe.pid==it.pnode.p_id){ 
@@ -151,6 +152,8 @@ public class WaveSim : MonoBehaviour
                     break;
                 }
             }
+            i++;
+            it=in_ms[i];
         }
         return i;
     }

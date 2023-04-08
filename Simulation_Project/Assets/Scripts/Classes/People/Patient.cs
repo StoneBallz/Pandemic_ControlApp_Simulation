@@ -7,7 +7,7 @@ public class Patient
     public int[] pos;
     public int[] home;
     public int p_id, age, time_to_live;
-    string p_name;
+    public string p_name;
     public bool infected,alive,healed;
     
     public Patient(int pin, string nam, int[] init, int ag=18){

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Patient : MonoBehaviour
+public class Patient 
 {
     public int[] pos;
     public int[] home;

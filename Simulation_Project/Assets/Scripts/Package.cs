@@ -9,17 +9,17 @@ public class Package{
   public Hospital hsnode;
   //
   public int pid=-1;
-  public int[] pat_change=null;
+  public int[] pat_change=new int[3];
   public int wid=-1;
-  public int[] war_change=null;
+  public int[] war_change=new int[1];
   public int hou_id=-1;
-  public int[] hou_change=null;
+  public int[] hou_change=new int[1];
   public int hos_id=-1;
-  public int[] hos_change=null;
+  public int[] hos_change=new int[1];
   //
-  bool split = false;
-  bool begin=false;
-  bool end=false;
+  public bool split = false;
+  public bool begin=false;
+  public bool end=false;
   bool pat_del=false;
   bool pat_data_out=false;
   bool war_del=false;
@@ -184,13 +184,13 @@ public class Package{
     henode=null;
     hsnode=null;
     pid=-1;
-    pat_change=null;
+    pat_change=new int[3];
     wid=-1;
-    war_change=null;
+    war_change=new int[1];
     hou_id=-1;
-    hou_change=null;
+    hou_change=new int[1];
     hos_id=-1;
-    hos_change=null;
+    hos_change=new int[1];
   }
   public bool is_begin(){
     return begin;

@@ -12,13 +12,10 @@ public class CityGraph : MonoBehaviour
     void Start()
     {
         int i=0;
-        temp.switch_begin();
-        arr[0] = temp;
+        arr[0] = new Package();
+        arr[0].begin=true;
         i++;
 
-        /*temp.switch_hou_del();
-        temp.henode=new House(1,"Lol's House");
-        temp.hou_id=temp.henode.node_id[0];*/
         arr[1]=new Package();
         arr[1].henode=new House(1, "Lol");
         i++;
@@ -28,7 +25,7 @@ public class CityGraph : MonoBehaviour
         i++;
 
         arr[3] = new Package();
-        arr[3].switch_split();
+        arr[3].split=true;
         i++;
 
         arr[4]=new Package();
@@ -40,16 +37,15 @@ public class CityGraph : MonoBehaviour
         i++;
 
         arr[6] = new Package();
-        arr[6].switch_split();
+        arr[6].split=true;
         i++;
 
         arr[7]=new Package();
         arr[7].wnode=new Warehouse(1,"Trader Joes");
         i++;
-        i++;
 
         arr[8] = new Package();
-        arr[8].switch_end();
+        arr[8].end=true;
         i++;
 
         arr[1].henode.Create_Connection(arr[4].hsnode);
@@ -59,38 +55,35 @@ public class CityGraph : MonoBehaviour
         arr[5].hsnode.Create_Connection(arr[7].wnode);
 
         int j=0;
-        temp.switch_begin();
-        pat_arr[0] = temp;
+        pat_arr[0] = new Package();
+        pat_arr[0].begin=true;
         j++;
 
-        temp.switch_pat_del();
+        /*temp.switch_pat_del();
         temp.pnode=new Patient(1, "Gowtham", arr[1].henode.node_id);
-        temp.pid=temp.pnode.p_id;
-        pat_arr[1] = temp;
+        temp.pid=temp.pnode.p_id;*/
+        pat_arr[1].pnode = new Patient(1, "Gowtham", new int[]{1,1});
+        pat_arr[1].pid=pat_arr[1].pnode.p_id;
         j++;
 
-        temp.pnode=new Patient(2, "Austin", arr[1].henode.node_id);
-        temp.pid=temp.pnode.p_id;
-        pat_arr[2] = temp;
+        pat_arr[2].pnode = new Patient(2, "Austin", arr[1].henode.node_id);
+        pat_arr[2].pid=pat_arr[2].pnode.p_id;
         j++;
 
-        temp.pnode=new Patient(3, "Pavan", arr[1].henode.node_id);
-        temp.pid=temp.pnode.p_id;
-        pat_arr[3] = temp;
+        pat_arr[3].pnode = new Patient(3, "Pavan", arr[1].henode.node_id);
+        pat_arr[3].pid=pat_arr[3].pnode.p_id;
         j++;
 
-        temp.pnode=new Patient(4, "Mukund", arr[2].henode.node_id);
-        temp.pid=temp.pnode.p_id;
-        pat_arr[4] = temp;
+        pat_arr[4].pnode = new Patient(4, "Mukund", arr[2].henode.node_id);
+        pat_arr[4].pid=pat_arr[4].pnode.p_id;
         j++;
 
-        temp.pnode=new Patient(5, "Ajay", arr[2].henode.node_id);
-        temp.pid=temp.pnode.p_id;
-        pat_arr[5] = temp;
+        pat_arr[5].pnode = new Patient(5, "Ajay", arr[2].henode.node_id);
+        pat_arr[5].pid=pat_arr[5].pnode.p_id;
         j++;
 
-        temp.switch_end();
-        arr[j] = temp;
+        pat_arr[6] = new Package();
+        pat_arr[6].end=true;
         j++;
 
         arr[1].henode.Print_Connections();

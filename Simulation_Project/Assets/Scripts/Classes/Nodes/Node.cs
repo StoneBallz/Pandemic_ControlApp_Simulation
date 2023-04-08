@@ -1,9 +1,8 @@
 using System.Collections;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : ScriptableObject
+public class Node 
 {
     public int[] node_id;
     public Node[] con;

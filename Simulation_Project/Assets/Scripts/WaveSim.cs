@@ -16,7 +16,7 @@ class pa{
 
     public int[] changes_out = new int[3];
 
-    public void set(int[] pi,int[] hi,int pd,bool i,bool di, bool he, int dwi, int dwot, int dft){
+    public pa (int[] pi,int[] hi,int pd,bool i,bool di, bool he, int dwi, int dwot, int dft){
         pos=pi;
         hid=hi;
         pid=pd;
@@ -42,7 +42,7 @@ class wa{
     public int dasire;
     public int[] changes_out;
 
-    public void set(int[] wi, int das){
+    public wa(int[] wi, int das){
         wid=wi;
         //days since last restock
         dasire=das;
@@ -60,8 +60,8 @@ public class WaveSim : MonoBehaviour
     pa[] parr=new pa[gen_vars.num_of_people];
     public Package[] recieve_msg(Package[] m){
         in_msg=m;
-        if(wave==0){
-            init_arrs();
+        if(wave<1){
+            init_arrs(in_msg);
         }
         int spl=update_parr();
         update_warr();
@@ -99,25 +99,19 @@ public class WaveSim : MonoBehaviour
         return out_msg;
     }
 
-    void init_arrs(){
-        int i=1, splits=0;;
-        pa temppa=new pa();
-        wa tempwa=new wa();
+    void init_arrs(Package[] in_ms){
+        int i=1;
         int[] widin=new int[2];
         widin[1]=3;
 
-        Package it=in_msg[i];
+        Package it=in_ms[i];
         while(!it.is_end()){
-            while(!it.is_split()&&splits==0){
-                temppa.set(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
-                parr[i-1]=temppa;
-                i++;
-            }
+            parr[i-1]=new pa(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
+            i++;
         }
         for(int j=0;j<gen_vars.num_of_wares;j++){
             widin[0]=j;
-            tempwa.set(widin, 0);
-            warr[j]=tempwa;
+            warr[j]=new wa(widin, 0);
         }
     }
 

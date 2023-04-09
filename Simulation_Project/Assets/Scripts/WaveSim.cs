@@ -54,7 +54,7 @@ class wa{
 public class WaveSim : MonoBehaviour
 {
     Package temp=new Package();
-    int wave=0;
+    public int wave=0;
     //Package[] in_msg;
     wa[] warr=new wa[gen_vars.num_of_wares];
     pa[] parr=new pa[gen_vars.num_of_people];
@@ -66,36 +66,37 @@ public class WaveSim : MonoBehaviour
         int spl=update_parr(m);
         update_warr();
         wave++;
-        return return_msg();
+        Package[] out_msg=return_msg();
+        return out_msg;
     }
 
     public Package[] return_msg(){
         int[] ch=new int[]{0,0,0};
         Package[] out_msg=new Package[1+gen_vars.num_of_people+1+gen_vars.num_of_wares+1];
         int j=0,k=0;
-        temp.switch_begin();
-        out_msg[j]=temp;
+        out_msg[j]=new Package();
+        out_msg[j].begin=true;
         j++;
-        temp.switch_pat_data();
-        for(int i=1;i<gen_vars.num_of_people;i++){
-            temp.pid=parr[i].pid;
-            temp.pat_change=parr[i].changes_out;
-            out_msg[i]=temp;
+        for(int i=1;i<gen_vars.num_of_people+1;i++){
+            out_msg[i]=new Package();
+            out_msg[i].pat_data_out=true;
+            out_msg[i].pid=parr[i-1].pid;
+            out_msg[i].pat_change=parr[i-1].changes_out;
             j++;
         }
-        temp.switch_split();
-        out_msg[j]=temp;
-        temp.switch_war_data();
+        out_msg[j]=new Package();
+        out_msg[j].switch_split();
         j++;
         k=j;
         for(int i=0;i<gen_vars.num_of_wares;i++){
-            temp.war_change=warr[i].changes_out;
-            out_msg[i+j]=temp;
+            out_msg[i+j]=new Package();
+            out_msg[i+j].war_data_out=true;
+            out_msg[i+j].wid=warr[i].wid[1];
+            out_msg[i+j].war_change=warr[i].changes_out;
             k++;
         }
-        temp.switch_end();
-        out_msg[k]=temp;
-        temp.switch_null();
+        out_msg[k]=new Package();
+        out_msg[k].end=true;
         return out_msg;
     }
 
@@ -106,8 +107,8 @@ public class WaveSim : MonoBehaviour
 
         Package it=in_ms[i];
         while(!it.is_end()){
-            Debug.Log("i "+i);
-            Debug.Log("Name "+it.pnode.p_name);
+            //Debug.Log("i "+i);
+            //Debug.Log("Name "+it.pnode.p_name);
             parr[i-1]=new pa(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
             i++;
             it=in_ms[i];

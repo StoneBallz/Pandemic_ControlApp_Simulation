@@ -7,8 +7,8 @@ public class Resources
     int n=3;
     class re{
         public string key="";
-        public int val=0, max=10;
-        public re(string k, int v=0){
+        public int val=0, max=250;
+        public re(string k, int v=25){
             key=k;
             val=v;
         }

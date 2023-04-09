@@ -17,10 +17,12 @@ public class CityGraph : MonoBehaviour
         i++;
 
         arr[1]=new Package();
+        arr[1].hou_del=true;
         arr[1].henode=new House(1, "Lol");
         i++;
 
         arr[2]=new Package();
+        arr[2].hou_del=true;
         arr[2].henode=new House(2, "Pol");
         i++;
 
@@ -29,10 +31,12 @@ public class CityGraph : MonoBehaviour
         i++;
 
         arr[4]=new Package();
+        arr[4].hos_del=true;
         arr[4].hsnode=new Hospital(1,"Apollo");
         i++;
 
         arr[5]=new Package();
+        arr[5].hos_del=true;
         arr[5].hsnode=new Hospital(2,"Kamakshi");
         i++;
 
@@ -41,6 +45,7 @@ public class CityGraph : MonoBehaviour
         i++;
 
         arr[7]=new Package();
+        arr[7].war_del=true;
         arr[7].wnode=new Warehouse(1,"Trader Joes");
         i++;
 
@@ -56,46 +61,57 @@ public class CityGraph : MonoBehaviour
 
         int j=0;
         pat_arr[0] = new Package();
-        pat_arr[0].switch_begin();
+        pat_arr[0].begin=true;
         j++;
 
         /*temp.switch_pat_del();
         temp.pnode=new Patient(1, "Gowtham", arr[1].henode.node_id);
         temp.pid=temp.pnode.p_id;*/
         pat_arr[1] = new Package();
-        pat_arr[1].switch_pat_del();
+        pat_arr[1].pat_del=true;
         pat_arr[1].pnode = new Patient(1, "Gowtham", arr[1].henode.node_id);
         pat_arr[1].pid=pat_arr[1].pnode.p_id;
         j++;
 
         pat_arr[2] = new Package();
-        pat_arr[2].switch_pat_del();
+        pat_arr[2].pat_del=true;
         pat_arr[2].pnode = new Patient(2, "Austin", arr[1].henode.node_id);
         pat_arr[2].pid=pat_arr[2].pnode.p_id;
         j++;
 
         pat_arr[3] = new Package();
-        pat_arr[3].switch_pat_del();
+        pat_arr[3].pat_del=true;
         pat_arr[3].pnode = new Patient(3, "Pavan", arr[1].henode.node_id);
         pat_arr[3].pid=pat_arr[3].pnode.p_id;
         j++;
 
         pat_arr[4] = new Package();
-        pat_arr[4].switch_pat_del();
+        pat_arr[4].pat_del=true;
         pat_arr[4].pnode = new Patient(4, "Mukund", arr[2].henode.node_id);
         pat_arr[4].pid=pat_arr[4].pnode.p_id;
         j++;
 
         pat_arr[5] = new Package();
-        pat_arr[5].switch_pat_del();
+        pat_arr[5].pat_del=true;
         pat_arr[5].pnode = new Patient(5, "Ajay", arr[2].henode.node_id);
         pat_arr[5].pid=pat_arr[5].pnode.p_id;
         j++;
 
         pat_arr[6] = new Package();
-        pat_arr[6].switch_end();
+        pat_arr[6].end=true;
         j++;
         //arr[1].henode.Print_Connections();
+    }
+
+    public void restock_wh(int id){
+        var ind= new int[]{id,3};
+        for(int i=0;i<4+n;i++){
+            if(arr[i].war_del){
+                if(arr[i].wnode.warehouse_id==id){
+                    arr[i].wnode.Restock();
+                }
+            }
+        }
     }
 
     // Pre Mukund Merge:

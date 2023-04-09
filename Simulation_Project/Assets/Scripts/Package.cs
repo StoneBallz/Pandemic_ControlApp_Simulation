@@ -20,14 +20,14 @@ public class Package{
   public bool split = false;
   public bool begin=false;
   public bool end=false;
-  bool pat_del=false;
-  bool pat_data_out=false;
-  bool war_del=false;
-  bool war_data_out=false;
-  bool hou_del=false;
-  bool hou_data_out=false;
-  bool hos_del=false;
-  bool hos_data_out=false;
+  public bool pat_del=false;
+  public bool pat_data_out=false;
+  public bool war_del=false;
+  public bool war_data_out=false;
+  public bool hou_del=false;
+  public bool hou_data_out=false;
+  public bool hos_del=false;
+  public bool hos_data_out=false;
   //
   public void switch_null(){
     split = false;
@@ -71,7 +71,7 @@ public class Package{
     hou_data_out=false;
     hos_del=false;
     hos_data_out=false;
-    null_out();
+    //null_out();
   }
   public void switch_end(){
     end=!end;
@@ -86,7 +86,7 @@ public class Package{
     hou_data_out=false;
     hos_del=false;
     hos_data_out=false;
-    null_out();
+    //null_out();
   }
   public void switch_pat_data(){
     pat_data_out=!pat_data_out;
@@ -101,7 +101,7 @@ public class Package{
     hou_data_out=false;
     hos_del=false;
     hos_data_out=false;
-    null_out();
+    //null_out();
   }
   public void switch_war_data(){
     war_data_out=!war_data_out;
@@ -116,7 +116,7 @@ public class Package{
     hou_data_out=false;
     hos_del=false;
     hos_data_out=false;
-    null_out();
+    //null_out();
   }
   public void switch_war_del(){
     war_del=!war_del;

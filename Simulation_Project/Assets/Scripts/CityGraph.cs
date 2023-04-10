@@ -9,6 +9,56 @@ public class CityGraph : MonoBehaviour
     public Package[] pat_arr=new Package[gen_vars.num_of_people+2];
     Package temp=new Package();
 
+    void Patient_hou_to_hos(int pid, int[] hos){
+        int[] home_tar=pat_arr[pid].pnode.home;
+        for(int i=1;i<4+n;i++){
+            if(!arr[i].split&&!arr[i].end){
+                if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
+                    arr[i].hsnode.Admit(pat_arr[pid].pnode);
+                }
+                if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
+                    arr[i].henode.Route(pid);
+                }
+            }
+        }
+    }
+
+    void Full_treatment(){
+        for(int i=1;i<4+n;i++){
+            if(arr[i].hos_del){
+                arr[i].hsnode.Treatment();
+            }
+        }
+    }
+
+    void Patient_hos_to_hou(int pid, int[] hos){
+        int[] home_tar=pat_arr[pid].pnode.home;
+        for(int i=1;i<4+n;i++){
+            if(!arr[i].split&&!arr[i].end){
+                if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
+                    arr[i].hsnode.Discharge(pid);
+                }
+                if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
+                    arr[i].henode.Return(pat_arr[pid].pnode);
+                }
+            }
+        }
+    }
+
+    void Resource_war_to_hos(int[] wid, int[] hos, int[] v){
+        for(int i=1;i<4+n;i++){
+            if(!arr[i].split&&!arr[i].end){
+                if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
+                    arr[i].hsnode.Topup(v);
+                }
+                if(arr[i].war_del&&arr[i].wnode.node_id==wid){
+                    arr[i].wnode.Dispatch(v);
+                }
+            }
+        }
+    }
+    
+
     void Start()
     {
         int i=0;

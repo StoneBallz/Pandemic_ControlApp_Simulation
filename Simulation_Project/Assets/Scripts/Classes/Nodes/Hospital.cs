@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Hospital : Node
 {
-    int hospital_id;
+    int hospital_id, top_of_rec=0;
     string hospital_na;
     int beds,num_pa=gen_vars.num_of_people;
     Patient[] current_patients=new Patient[gen_vars.num_of_people];
@@ -16,10 +16,12 @@ public class Hospital : Node
 
     //Patient Section
     void p_push(Patient p){
-        for(int i=0;i<num_pa;i++){
-            if(current_patients[i]==null){
-                current_patients[i]=p;
-                return;
+        if(top_of_rec<num_pa){
+            for(int i=0;i<num_pa;i++){
+                if(current_patients[i]==null){
+                    current_patients[i]=p;
+                    return;
+                }
             }
         }
     }
@@ -29,11 +31,13 @@ public class Hospital : Node
         p.travel(this.node_id);
     }
 
-    public void Dispatch(int patid){
-        for(int i=0;i<num_pa;i++){
-            if(current_patients[i].p_id==patid){
-                current_patients[i]=null;
-                return;
+    public void Discharge(int patid){
+        if(top_of_rec>0){
+            for(int i=0;i<num_pa;i++){
+                if(current_patients[i].p_id==patid){
+                    current_patients[i]=null;
+                    return;
+                }
             }
         }
     }
@@ -50,9 +54,11 @@ public class Hospital : Node
         return;
     }
 
-    public void Treatment(int[] vals){
-        for(int i=0;i<rn;i++){
-            res.decrement(ks[i],vals[i]);
+    public void Treatment(){
+        for(int j=0;j<top_of_rec;j++){
+            for(int i=0;i<rn;i++){
+                res.decrement(ks[i],2);
+            }
         }
         return;
     }

@@ -35,22 +35,22 @@ public class Resources
         return -1;
     }
 
-    int overflow(int v, string k){
+    bool overflow(int v, string k){
         for(int i=0;i<n;i++){
             if(res[i].key==k){
-                if(v>res[i].max){
-                    return 1;
+                if(v+res[i].val>res[i].max){
+                    return true;
                 }
             }
         } 
-        return 0;
+        return false;
     }
 
-    int underflow(int v){
+    bool underflow(int v){
         if(v<0){
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
 
     public void set(int[] v){
@@ -69,8 +69,14 @@ public class Resources
     public void increment(string k, int v){
         for(int i=0;i<n;i++){
             if(res[i].key==k){
-                res[i].val+=v;
+                if(!overflow(v,k)){
+                    res[i].val+=v;
+                }
+                else{
+                    res[i].val=res[i].max;
+                }
             }
+
         } 
     }
     public void increment(string k){
@@ -84,7 +90,12 @@ public class Resources
     public void decrement(string k, int v){
         for(int i=0;i<n;i++){
             if(res[i].key==k){
-                res[i].val-=v;
+                if(!underflow(res[i].val-v)){
+                    res[i].val-=v;
+                }
+                else{
+                    res[i].val=0;
+                }
             }
         } 
     }

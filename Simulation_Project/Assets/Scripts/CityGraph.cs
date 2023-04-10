@@ -88,6 +88,7 @@ public class CityGraph : MonoBehaviour
         pat_arr[4] = new Package();
         pat_arr[4].pat_del=true;
         pat_arr[4].pnode = new Patient(4, "Mukund", arr[2].henode.node_id);
+        pat_arr[4].pnode.infected=true;
         pat_arr[4].pid=pat_arr[4].pnode.p_id;
         j++;
 

@@ -47,14 +47,14 @@ public class GameManager : MonoBehaviour
         int x=1+gen_vars.num_of_people+1+gen_vars.num_of_wares+1;
         for(int i=1;i<x;i++){
             if(f_quad_out[i].is_pat_data_out()){
-                Debug.Log("Somone: "+f_quad_out[i].pat_change[0]+" "+f_quad_out[i].pat_change[1]+" "+f_quad_out[i].pat_change[2]);
+                //Debug.Log("Somone: "+f_quad_out[i].pat_change[0]+" "+f_quad_out[i].pat_change[1]+" "+f_quad_out[i].pat_change[2]);
                 int ind=f_quad_out[i].pid;
                 if(f_quad_out[i].pat_change[0]==1){
-                    Debug.Log("Somone Infected");
+                    Debug.Log(f_quad_out[i].pid+" Infected");
                     city_graph.pat_arr[ind].pnode.infect();
                 }
                 else if(f_quad_out[i].pat_change[1]==1){
-                    Debug.Log("Somone Died");
+                    Debug.Log(f_quad_out[i].pid+" Died");
                     city_graph.pat_arr[ind].pnode.die();
                 }
                 else if(f_quad_out[i].pat_change[2]==1){

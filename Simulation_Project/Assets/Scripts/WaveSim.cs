@@ -18,7 +18,7 @@ class pa{
 
     public pa (int[] pi,int[] hi,int pd,bool i,bool di, bool he, int dwi, int dwot, int dft){
         pos=pi;
-        hid=hi;
+        hid=pi;
         pid=pd;
         inf=i;
         die=di;
@@ -81,6 +81,7 @@ public class WaveSim : MonoBehaviour
             out_msg[i]=new Package();
             out_msg[i].pat_data_out=true;
             out_msg[i].pid=parr[i-1].pid;
+            //Debug.Log(parr[i-1].changes_out[0]+" "+parr[i-1].changes_out[1]+" "+parr[i-1].changes_out[2]);
             out_msg[i].pat_change=parr[i-1].changes_out;
             j++;
         }
@@ -163,11 +164,14 @@ public class WaveSim : MonoBehaviour
         System.Random rnd = new System.Random();
         for(int j=0;j<gen_vars.num_of_people;j++){
             pa pe=parr[j];
+            Debug.Log(pe.checked_this_wave);
             if(pe.checked_this_wave==false && return_pos_check(x,pe) && pe.inf==false && pe.heal==false){
                 pe.dawinf++;
                 if(pe.dawinf>=gen_vars.days_with_inf_to_be){
                     pe.inf=true;
+                    Debug.Log("days with: "+pe.dawinf + "Inf: "+pe.inf);
                     pe.changes_out[0]=1;
+                    Debug.Log("changes: "+pe.changes_out[0]);
                 }
                 else if(pe.dawinf>0&&pe.dawinf<gen_vars.days_with_inf_to_be){
                     if(rnd.Next(1,100)>=50){

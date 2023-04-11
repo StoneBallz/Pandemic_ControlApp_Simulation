@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
     }
 
     int third_quadrant(){
-        t_quad_out=decision_maker.make_decision(city_graph.arr);
+        t_quad_out=decision_maker.make_decision(city_graph.arr,4+gen_vars.n_nodes);
         return 1;
     }
 

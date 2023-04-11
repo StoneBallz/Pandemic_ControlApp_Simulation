@@ -9,6 +9,14 @@ public class CityGraph : MonoBehaviour
     public Package[] pat_arr=new Package[gen_vars.num_of_people+2];
     Package temp=new Package();
 
+    void Full_treatment(){
+        for(int i=1;i<4+n;i++){
+            if(arr[i].hos_del){
+                arr[i].hsnode.Treatment();
+            }
+        }
+    }
+
     void Patient_hou_to_hos(int pid, int[] hos){
         int[] home_tar=pat_arr[pid].pnode.home;
         for(int i=1;i<4+n;i++){
@@ -19,14 +27,6 @@ public class CityGraph : MonoBehaviour
                 if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
                     arr[i].henode.Route(pid);
                 }
-            }
-        }
-    }
-
-    void Full_treatment(){
-        for(int i=1;i<4+n;i++){
-            if(arr[i].hos_del){
-                arr[i].hsnode.Treatment();
             }
         }
     }

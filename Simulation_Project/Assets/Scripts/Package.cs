@@ -13,9 +13,8 @@ public class Package{
   public int wid=-1;
   public int[] war_change=new int[1];
   public int hou_id=-1;
-  public int[] hou_change=new int[1];
   public int hos_id=-1;
-  public int[] hos_change=new int[1];
+  public int[] decision_pack=new int[8];
   //
   public bool split = false;
   public bool begin=false;
@@ -25,9 +24,8 @@ public class Package{
   public bool war_del=false;
   public bool war_data_out=false;
   public bool hou_del=false;
-  public bool hou_data_out=false;
   public bool hos_del=false;
-  public bool hos_data_out=false;
+  public bool decision_out=false;
   //
   public void switch_null(){
     split = false;
@@ -38,9 +36,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   public void switch_split(){
@@ -53,9 +51,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   public void switch_begin(){
@@ -68,9 +66,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     //null_out();
   }
   public void switch_end(){
@@ -83,9 +81,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     //null_out();
   }
   public void switch_pat_data(){
@@ -98,9 +96,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     //null_out();
   }
   public void switch_war_data(){
@@ -113,9 +111,9 @@ public class Package{
     war_del=false;
     //war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     //null_out();
   }
   public void switch_war_del(){
@@ -128,9 +126,9 @@ public class Package{
     //war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   public void switch_hou_del(){
@@ -143,9 +141,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     //hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   public void switch_hos_del(){
@@ -158,9 +156,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     //hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   public void switch_pat_del(){
@@ -173,9 +171,9 @@ public class Package{
     war_del=false;
     war_data_out=false;
     hou_del=false;
-    hou_data_out=false;
+    //a;
     hos_del=false;
-    hos_data_out=false;
+    decision_out=false;
     null_out();
   }
   void null_out(){
@@ -188,9 +186,7 @@ public class Package{
     wid=-1;
     war_change=new int[1];
     hou_id=-1;
-    hou_change=new int[1];
     hos_id=-1;
-    hos_change=new int[1];
   }
   public bool is_begin(){
     return begin;

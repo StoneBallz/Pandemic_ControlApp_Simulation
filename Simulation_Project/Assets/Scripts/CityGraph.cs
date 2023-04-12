@@ -9,7 +9,7 @@ public class CityGraph : MonoBehaviour
     public Package[] pat_arr=new Package[gen_vars.num_of_people+2];
     Package temp=new Package();
 
-    void Full_treatment(){
+    public void Full_treatment(){
         for(int i=1;i<4+n;i++){
             if(arr[i].hos_del){
                 arr[i].hsnode.Treatment();
@@ -17,8 +17,8 @@ public class CityGraph : MonoBehaviour
         }
     }
 
-    void Patient_hou_to_hos(int pid, int[] hos){
-        Debug.Log("Hou->Hos");
+    public void Patient_hou_to_hos(int pid, int[] hos){
+        //Debug.Log("Hou->Hos");
         int[] home_tar=pat_arr[pid].pnode.home;
         int flag=0;
         for(int i=1;i<4+n;i++){
@@ -38,8 +38,8 @@ public class CityGraph : MonoBehaviour
         }
     }
 
-    void Patient_hos_to_hou(int pid, int[] hos){
-        Debug.Log("Hos->Hou");
+    public void Patient_hos_to_hou(int pid, int[] hos){
+        //Debug.Log("Hos->Hou");
         int[] home_tar=pat_arr[pid].pnode.home;
         int flag=0;
         for(int i=1;i<4+n;i++){
@@ -59,8 +59,8 @@ public class CityGraph : MonoBehaviour
         }
     }
 
-    void Resource_war_to_hos(int[] wid, int[] hos, int[] v){
-        Debug.Log("War->Hos");
+    public void Resource_war_to_hos(int[] wid, int[] hos, int[] v){
+        //Debug.Log("War->Hos");
         int flag=0;
         for(int i=1;i<4+n;i++){
             if(!arr[i].split&&!arr[i].end){
@@ -147,6 +147,7 @@ public class CityGraph : MonoBehaviour
         pat_arr[2] = new Package();
         pat_arr[2].pat_del=true;
         pat_arr[2].pnode = new Patient(2, "Austin", arr[1].henode.node_id);
+        pat_arr[2].pnode.infected=true;
         pat_arr[2].pid=pat_arr[2].pnode.p_id;
         j++;
 

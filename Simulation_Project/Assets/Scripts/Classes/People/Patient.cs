@@ -23,8 +23,9 @@ public class Patient
 
     public void infect(){
         //If person has ald been healed once, we treat them as un-infectable for now 
-        if(healed==false && alive==true){
+        if(healed==false && alive==true && infected==false){
             infected=true;
+
         }
     }
 

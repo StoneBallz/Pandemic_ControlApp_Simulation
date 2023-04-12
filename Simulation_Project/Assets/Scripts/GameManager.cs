@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     int first_qudrant(){
         f_quad_out = wave_Sim.recieve_msg(city_graph.pat_arr);
+        Debug.Log("Wave Number = "+wave_Sim.wave);
         /*for(int i=0;i<1+gen_vars.num_of_people+1+gen_vars.num_of_wares+1;i++){
             Debug.Log(f_quad_out[i].is_pat_data_out());
         }
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
                     city_graph.pat_arr[ind].pnode.die();
                 }
                 else if(f_quad_out[i].pat_change[2]==1){
-                    Debug.Log("Somone Fully Recovered");
+                    Debug.Log(f_quad_out[i].pid+" Fully Recovered");
                     city_graph.pat_arr[ind].pnode.fully_recover();
                 }
             }
@@ -80,9 +81,30 @@ public class GameManager : MonoBehaviour
     }
 
     int fourth_quadrant(){
+        city_graph.Full_treatment();
         int max=gen_vars.num_of_people*2+gen_vars.num_of_hos*2;
         for(int i=0;i<max;i++){
-
+            if(t_quad_out[i].decision_out){
+                int[] desc_temp=t_quad_out[i].decision_pack;
+                int func=desc_temp[0];
+                if(func>0&&func<4){
+                    if(func==1){
+                        city_graph.Patient_hou_to_hos(desc_temp[1], new int[]{desc_temp[2], desc_temp[3]});
+                        Debug.Log(desc_temp[1]+" moved to hospital "+desc_temp[0]);
+                    }
+                    else if(func==2){
+                        city_graph.Patient_hos_to_hou(desc_temp[1], new int[]{desc_temp[2], desc_temp[3]});
+                        Debug.Log(desc_temp[1]+" moved from hospital "+desc_temp[0]);
+                    }
+                    else if(func==3){
+                        int[] w=new int[]{desc_temp[1],desc_temp[2]};
+                        int[] h=new int[]{desc_temp[3],desc_temp[4]};
+                        int[] vs=new int[]{desc_temp[5],desc_temp[6],desc_temp[7]};
+                        city_graph.Resource_war_to_hos(w,h,vs);
+                        Debug.Log(vs[0]+":"+vs[1]+":"+vs[2]+" moved from Warehouse "+w[0]+" to Hospital "+h[0]);
+                    }
+                }
+            }
         }
         return 1;
     }
@@ -98,11 +120,15 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if(running==1){
+        if(wave_Sim.wave==0){
+            first_qudrant();
+        }
+        else if(running==1&&wave_Sim.wave<=50&&wave_Sim.wave>0){
             first_qudrant();
             second_quadrant();
             third_quadrant();
-            //fourth_quadrant();
+            fourth_quadrant();
+            Debug.Log("");
         }
     }
 }

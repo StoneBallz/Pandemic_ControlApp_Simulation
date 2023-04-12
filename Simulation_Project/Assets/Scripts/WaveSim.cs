@@ -59,7 +59,6 @@ public class WaveSim : MonoBehaviour
     wa[] warr=new wa[gen_vars.num_of_wares];
     pa[] parr=new pa[gen_vars.num_of_people];
     public Package[] recieve_msg(Package[] m){
-        //in_msg=m;
         if(wave<1){
             init_arrs(m);
         }
@@ -110,7 +109,7 @@ public class WaveSim : MonoBehaviour
         while(!it.is_end()){
             //Debug.Log("i "+i);
             //Debug.Log("Name "+it.pnode.p_name);
-            parr[i-1]=new pa(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,it.pnode.alive,it.pnode.healed,0,0,0);
+            parr[i-1]=new pa(it.pnode.pos,it.pnode.home,it.pnode.p_id,it.pnode.infected,false,false,0,0,0);
             i++;
             it=in_ms[i];
         }
@@ -122,11 +121,12 @@ public class WaveSim : MonoBehaviour
 
     int update_parr(Package[] in_ms){
         int i=1;
-        int[] ch=new int[]{0,0,0};
         Package it=in_ms[i];
         for(int j=0;j<gen_vars.num_of_people;j++){
             parr[j].checked_this_wave=false;
-            //parr[j].changes_out=ch;
+            parr[j].changes_out[0]=0;
+            parr[j].changes_out[1]=0;
+            parr[j].changes_out[2]=0;
         }
         while(!it.is_end()){
             for(int j=0;j<gen_vars.num_of_people;j++){
@@ -141,7 +141,7 @@ public class WaveSim : MonoBehaviour
                         pe.heal=true;
                         pe.changes_out[2]=1;
                     }
-                    if(pe.inf==true && pe.heal==false && pe.hid==pe.pos){
+                    if(pe.inf==true && pe.heal==false && pe.hid==pe.pos&&pe.die==false){
                         pe.dawotr++;
                         if(pe.dawotr>=gen_vars.days_to_die){
                             pe.die=true;
@@ -163,20 +163,18 @@ public class WaveSim : MonoBehaviour
     void check_house_inf(pa x){
         System.Random rnd = new System.Random();
         for(int j=0;j<gen_vars.num_of_people;j++){
-            pa pe=parr[j];
-            //Debug.Log(pe.checked_this_wave);
-            if(pe.checked_this_wave==false && return_pos_check(x,pe) && pe.inf==false && pe.heal==false){
-                pe.dawinf++;
-                if(pe.dawinf>=gen_vars.days_with_inf_to_be){
-                    pe.inf=true;
-                    Debug.Log("days with: "+pe.dawinf + "Inf: "+pe.inf);
-                    pe.changes_out[0]=1;
-                    Debug.Log("changes: "+pe.changes_out[0]);
+            //Debug.Log(parr[j].checked_this_wave);
+            if(return_pos_check(x,parr[j])&&parr[j].inf==false&&parr[j].die==false){
+                parr[j].dawinf++;
+                parr[j].checked_this_wave=true;
+                if(parr[j].dawinf>=gen_vars.days_with_inf_to_be){
+                    parr[j].inf=true;
+                    parr[j].changes_out[0]=1;
                 }
-                else if(pe.dawinf>0&&pe.dawinf<gen_vars.days_with_inf_to_be){
-                    if(rnd.Next(1,100)>=50){
-                        pe.inf=true;
-                        pe.changes_out[0]=1;
+                else if(parr[j].dawinf>0&&parr[j].dawinf<gen_vars.days_with_inf_to_be){
+                    if(rnd.Next(1,101)>50){
+                        parr[j].inf=true;
+                        parr[j].changes_out[0]=1;
                     }
                 }
 

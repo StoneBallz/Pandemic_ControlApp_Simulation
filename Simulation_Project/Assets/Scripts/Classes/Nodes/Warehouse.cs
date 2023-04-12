@@ -18,7 +18,7 @@ public class Warehouse : Node
     public int stock_up=50;
     public void Restock(){
         for(int i=0;i<rn;i++){
-            res.increment(ks[i],50);
+            res.increment(ks[i],150);
         }
         return;
     }

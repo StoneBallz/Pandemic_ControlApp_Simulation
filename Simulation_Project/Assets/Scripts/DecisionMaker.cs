@@ -12,44 +12,44 @@ public class DecisionMaker : MonoBehaviour
     void Start()
     {
         out_msg[0] = new Package();
-        out_msg[0].switch_begin();
+        out_msg[0].begin=true;
     }
 
     public Package[] make_decision(Package[] arr, int n){
         //k=1;
-        return form_final_decision();
+        return pure_rand_descs();
     }
     
     Package[] pure_rand_descs(){
         int nd=gen_vars.num_of_people*2+gen_vars.num_of_hos*2+1;
         System.Random rnd = new System.Random();
         for(int i=1;i<nd;i+=2){
-            int func=rnd.Next(0,3);
+            int func=rnd.Next(1,4);
             if(func>0&&func<4){
                 out_msg[i]=new Package();
                 out_msg[i].decision_out=true;
                 out_msg[i].decision_pack[0]=func;
                 if(func==1){
-                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_people);
-                    out_msg[i].decision_pack[2]=rnd.Next(1,gen_vars.num_of_hos);
+                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_people+1);
+                    out_msg[i].decision_pack[2]=rnd.Next(1,gen_vars.num_of_hos+1);
                     out_msg[i].decision_pack[3]=2;
                 }
                 else if(func==2){
-                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_people);
-                    out_msg[i].decision_pack[2]=rnd.Next(1,gen_vars.num_of_hos);
+                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_people+1);
+                    out_msg[i].decision_pack[2]=rnd.Next(1,gen_vars.num_of_hos+1);
                     out_msg[i].decision_pack[3]=2;
                 }
                 else if(func==3){
-                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_wares);
+                    out_msg[i].decision_pack[1]=rnd.Next(1,gen_vars.num_of_wares+1);
                     out_msg[i].decision_pack[2]=3;
-                    out_msg[i].decision_pack[3]=rnd.Next(1,gen_vars.num_of_hos);
+                    out_msg[i].decision_pack[3]=rnd.Next(1,gen_vars.num_of_hos+1);
                     out_msg[i].decision_pack[4]=2;
-                    out_msg[i].decision_pack[5]=rnd.Next(0,50);
-                    out_msg[i].decision_pack[6]=rnd.Next(0,50);
-                    out_msg[i].decision_pack[7]=rnd.Next(0,50);
+                    out_msg[i].decision_pack[5]=rnd.Next(0,51);
+                    out_msg[i].decision_pack[6]=rnd.Next(0,51);
+                    out_msg[i].decision_pack[7]=rnd.Next(0,51);
                 }
                 out_msg[i+1]=new Package();
-                out_msg[i+1].switch_split();
+                out_msg[i+1].split=true;
             }
         }
         return out_msg;

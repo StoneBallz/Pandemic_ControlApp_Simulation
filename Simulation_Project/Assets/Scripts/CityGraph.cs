@@ -18,6 +18,7 @@ public class CityGraph : MonoBehaviour
     }
 
     void Patient_hou_to_hos(int pid, int[] hos){
+        Debug.Log("Hou->Hos");
         int[] home_tar=pat_arr[pid].pnode.home;
         int flag=0;
         for(int i=1;i<4+n;i++){
@@ -38,6 +39,7 @@ public class CityGraph : MonoBehaviour
     }
 
     void Patient_hos_to_hou(int pid, int[] hos){
+        Debug.Log("Hos->Hou");
         int[] home_tar=pat_arr[pid].pnode.home;
         int flag=0;
         for(int i=1;i<4+n;i++){
@@ -58,6 +60,7 @@ public class CityGraph : MonoBehaviour
     }
 
     void Resource_war_to_hos(int[] wid, int[] hos, int[] v){
+        Debug.Log("War->Hos");
         int flag=0;
         for(int i=1;i<4+n;i++){
             if(!arr[i].split&&!arr[i].end){

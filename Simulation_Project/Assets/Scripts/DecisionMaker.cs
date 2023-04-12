@@ -5,7 +5,8 @@ using System;
 
 public class DecisionMaker : MonoBehaviour
 {
-    int k=0, max=gen_vars.num_of_people*2+gen_vars.num_of_hos*2;
+    //int k=0
+    int max=gen_vars.num_of_people*2+gen_vars.num_of_hos*2;
     Package[] out_msg=new Package[gen_vars.num_of_people*2+gen_vars.num_of_hos*2+1];
     
     void Start()
@@ -15,7 +16,7 @@ public class DecisionMaker : MonoBehaviour
     }
 
     public Package[] make_decision(Package[] arr, int n){
-        k=1;
+        //k=1;
         return form_final_decision();
     }
     

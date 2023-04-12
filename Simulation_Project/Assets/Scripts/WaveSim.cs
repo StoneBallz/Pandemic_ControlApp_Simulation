@@ -164,7 +164,7 @@ public class WaveSim : MonoBehaviour
         System.Random rnd = new System.Random();
         for(int j=0;j<gen_vars.num_of_people;j++){
             pa pe=parr[j];
-            Debug.Log(pe.checked_this_wave);
+            //Debug.Log(pe.checked_this_wave);
             if(pe.checked_this_wave==false && return_pos_check(x,pe) && pe.inf==false && pe.heal==false){
                 pe.dawinf++;
                 if(pe.dawinf>=gen_vars.days_with_inf_to_be){

@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("------------------------------------");*/
         //Debug.Log(wave_Sim.wave);
+        //
         return 1;
     }
 
@@ -79,6 +80,10 @@ public class GameManager : MonoBehaviour
     }
 
     int fourth_quadrant(){
+        int max=gen_vars.num_of_people*2+gen_vars.num_of_hos*2;
+        for(int i=0;i<max;i++){
+
+        }
         return 1;
     }
 
@@ -97,7 +102,7 @@ public class GameManager : MonoBehaviour
             first_qudrant();
             second_quadrant();
             third_quadrant();
-            fourth_quadrant();
+            //fourth_quadrant();
         }
     }
 }

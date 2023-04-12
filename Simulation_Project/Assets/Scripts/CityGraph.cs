@@ -19,39 +19,57 @@ public class CityGraph : MonoBehaviour
 
     void Patient_hou_to_hos(int pid, int[] hos){
         int[] home_tar=pat_arr[pid].pnode.home;
+        int flag=0;
         for(int i=1;i<4+n;i++){
-            if(!arr[i].split&&!arr[i].end){
-                if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
-                    arr[i].hsnode.Admit(pat_arr[pid].pnode);
+            if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
+                for(int j=0;j<arr[i].henode.top;j++){
+                    if(arr[i].henode.con[j].node_id==hos){
+                        arr[i].henode.Route(pid);
+                        flag=1;
+                    }
                 }
-                if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
-                    arr[i].henode.Route(pid);
-                }
+            }
+        }
+        for(int i=1;i<4+n;i++){
+            if(arr[i].hos_del&&arr[i].hsnode.node_id==hos&&flag==1){
+                arr[i].hsnode.Admit(pat_arr[pid].pnode);
             }
         }
     }
 
     void Patient_hos_to_hou(int pid, int[] hos){
         int[] home_tar=pat_arr[pid].pnode.home;
+        int flag=0;
         for(int i=1;i<4+n;i++){
-            if(!arr[i].split&&!arr[i].end){
-                if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
-                    arr[i].hsnode.Discharge(pid);
+            if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
+                for(int j=0;j<arr[i].henode.top;j++){
+                    if(arr[i].henode.con[j].node_id==hos){
+                        arr[i].henode.Return(pat_arr[pid].pnode);
+                        flag=1;
+                    }
                 }
-                if(arr[i].hou_del&&arr[i].henode.node_id==home_tar){
-                    arr[i].henode.Return(pat_arr[pid].pnode);
-                }
+            }
+        }
+        for(int i=1;i<4+n;i++){
+            if(arr[i].hos_del&&arr[i].hsnode.node_id==hos&&flag==1){
+                arr[i].hsnode.Discharge(pid);
             }
         }
     }
 
     void Resource_war_to_hos(int[] wid, int[] hos, int[] v){
+        int flag=0;
         for(int i=1;i<4+n;i++){
             if(!arr[i].split&&!arr[i].end){
                 if(arr[i].hos_del&&arr[i].hsnode.node_id==hos){
-                    arr[i].hsnode.Topup(v);
+                    for(int j=0;j<arr[i].hsnode.top;j++){
+                        if(arr[i].hsnode.con[j].node_id==wid){
+                            flag=1;
+                            arr[i].hsnode.Topup(v);
+                        }
+                    }
                 }
-                if(arr[i].war_del&&arr[i].wnode.node_id==wid){
+                if(arr[i].war_del&&arr[i].wnode.node_id==wid&&flag==1){
                     arr[i].wnode.Dispatch(v);
                 }
             }
